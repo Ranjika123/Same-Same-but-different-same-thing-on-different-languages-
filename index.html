@@ -1,0 +1,86 @@
+<html>
+<head>
+  <style>
+    .keyboard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .key {
+      height: 100px;
+      width: 50px;
+      border: 1px solid black;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .key.black {
+      width: 30px;
+      margin-left: -15px;
+      margin-right: -15px;
+      background-color: black;
+      z-index: 1;
+    }
+
+    .key.active {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="keyboard">
+    <div class="key" data-note="C"></div>
+    <div class="key black" data-note="C#"></div>
+    <div class="key" data-note="D"></div>
+    <div class="key black" data-note="D#"></div>
+    <div class="key" data-note="E"></div>
+    <div class="key" data-note="F"></div>
+    <div class="key black" data-note="F#"></div>
+    <div class="key" data-note="G"></div>
+    <div class="key black" data-note="G#"></div>
+    <div class="key" data-note="A"></div>
+    <div class="key black" data-note="A#"></div>
+    <div class="key" data-note="B"></div>
+    <div class="key" data-note="C2"></div>
+  </div>
+  <script>
+    // Load the sounds
+    const sounds = {};
+    const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C2"];
+    notes.forEach(note => {
+      sounds[note] = new Audio(`sounds/${note}.mp3`);
+    });
+
+    // Get the keys
+    const keys = document.querySelectorAll(".key");
+
+    // Add event listeners
+    keys.forEach(key => {
+      key.addEventListener("click", () => playKey(key));
+    });
+
+    document.addEventListener("keydown", event => {
+      const key = event.key.toUpperCase();
+      const note = notes.find(note => note.startsWith(key));
+      if (note) {
+        const keyElement = document.querySelector(`.key[data-note="${note}"]`);
+        playKey(keyElement);
+      }
+    });
+
+    // Play a key
+    function playKey(key) {
+      // Stop the previous sound
+      sounds[key.dataset.note].pause();
+      sounds[key.dataset.note].currentTime = 0;
+      // Play the new sound
+      sounds[key.dataset.note].play();
+      // Highlight the key
+      key.classList.add("active");
+      setTimeout(() => key.classList.remove("active"), 300);
+    }
+  </script>
+</body>
+</html>
