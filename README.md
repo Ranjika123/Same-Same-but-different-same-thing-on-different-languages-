@@ -38,7 +38,7 @@ pip install PyQt5 pygame
 python piano.py
 ```
 
-2.## C++ Version
+2. ## C++ Version
 - Open the project in Visual Studio or another C# IDE.
 - uild and run the project.
   
