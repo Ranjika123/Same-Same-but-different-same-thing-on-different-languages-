@@ -1,6 +1,6 @@
 # Virtual Piano
 
-Virtual Piano is a simple musical keyboard application that allows users to play piano notes using the computer keyboard or by clicking on virtual piano keys.
+Virtual Piano is a simple musical keyboard application that allows users to play piano notes using the computer mouse by clicking on virtual piano keys.
 
 ## Features
 
